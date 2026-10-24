@@ -1,0 +1,12 @@
+namespace: automation
+name: kubernetes_platform
+version: 1.4.0
+readme: README.md
+authors:
+  - Wessel Hulleman <wessel@hulleman.io>
+description: Example collection, packaged as its own Ansible Execution Environment.
+license:
+  - MIT
+repository: https://github.com/wsslhllmn/ansible-ee-example
+dependencies:
+  kubernetes.core: ">=5.0.0"

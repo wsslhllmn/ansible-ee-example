@@ -1,0 +1,15 @@
+---
+- name: Show which runtime this playbook runs with
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Collect runtime information
+      automation.kubernetes_platform.ee_info:
+      register: ee
+
+    - name: Show it
+      ansible.builtin.debug:
+        msg:
+          - "Python {{ ee.python_version }} ({{ ee.python_executable }})"
+          - "ansible-core {{ ee.ansible_core_version }}"
+          - "kubernetes {{ ee.packages.kubernetes | default('not installed', true) }}"

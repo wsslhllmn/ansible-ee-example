@@ -1,0 +1,2 @@
+# Python packages this collection's own modules need.
+# None: ee_info only uses the standard library, and the kubernetes client is declared by kubernetes.core.

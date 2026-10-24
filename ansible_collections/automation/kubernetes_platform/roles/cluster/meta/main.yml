@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  author: Wessel Hulleman
+  description: Example role 'cluster' for automation.kubernetes_platform
+  license: MIT
+  min_ansible_version: "2.16"
+dependencies: []

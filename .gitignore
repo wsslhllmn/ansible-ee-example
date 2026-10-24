@@ -1,0 +1,4 @@
+context/
+*.tar.gz
+ansible-navigator.log
+*-artifact-*.json

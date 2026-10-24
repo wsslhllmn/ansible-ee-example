@@ -1,0 +1,10 @@
+---
+# Placeholder playbook: calls the (empty) roles of the collection, so it runs inside
+# the execution environment without touching any system.
+- name: Run the roles of automation.kubernetes_platform
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - automation.kubernetes_platform.cluster
+    - automation.kubernetes_platform.namespace
+    - automation.kubernetes_platform.hardening

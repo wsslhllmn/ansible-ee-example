@@ -1,0 +1,32 @@
+# The pipeline from the blog post, for GitLab with a podman-in-podman runner.
+stages:
+  - build
+  - publish
+
+build-ee:
+  stage: build
+  image: registry.example.com/automation/ansible-buildkit:latest
+  tags:
+    - podman-in-podman
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - ansible-builder build --container-runtime podman
+        -f execution-environment.yml
+        -t $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+    - echo "$CI_REGISTRY_PASSWORD" |
+        podman login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+    - podman push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+
+# Publish the collection with the same version as the image
+publish-collection:
+  stage: publish
+  image: registry.example.com/automation/ansible-buildkit:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - ansible-galaxy collection build
+        ansible_collections/automation/kubernetes_platform
+    - ansible-galaxy collection publish
+        automation-kubernetes_platform-$CI_COMMIT_TAG.tar.gz
+        --server "$AH_SERVER_URL" --api-key "$AH_API_TOKEN"

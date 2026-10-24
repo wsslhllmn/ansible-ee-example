@@ -1,0 +1,5 @@
+---
+# Placeholder. In a real collection the tasks for 'hardening' go here.
+# This example is about packaging the collection as an execution environment,
+# so the role is intentionally empty.
+[]
